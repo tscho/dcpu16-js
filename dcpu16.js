@@ -27,9 +27,9 @@ function DCPU16() {
 }
 
 DCPU16.prototype.tick = function() {
-  var opcode = this.RAM[this.PC] & 0x000F;
-  var a = (this.RAM[this.PC] & 0x01F8) >> 4;
-  var b = (this.RAM[this.PC] & 0xFE00) >> 10;
+  var opcode = this.RAM[this.PC[0]] & 0x000F;
+  var a = (this.RAM[this.PC[0]] & 0x01F8) >> 4;
+  var b = (this.RAM[this.PC[0]] & 0xFE00) >> 10;
 
   //hook up src/destination
   var src = this.getLoc(b);
@@ -160,16 +160,16 @@ DCPU16.prototype.getLoc = function(lCode) {
     case 0x16:
     case 0x17:
       loc = new MemLoc(this.RAM, 
-          this.registers[lCode-0x10][0] + this.RAM[++this.PC]);
+          this.registers[lCode-0x10][0] + this.RAM[++this.PC[0]]);
       break;
     case 0x18:
-      loc = new MemLoc(this.RAM, this.RAM[this.SP++]);
+      loc = new MemLoc(this.RAM, this.RAM[this.SP[0]++]);
       break;
     case 0x19:
-      loc = new MemLoc(this.RAM, this.RAM[this.SP]);
+      loc = new MemLoc(this.RAM, this.RAM[this.SP[0]]);
       break;
     case 0x1a:
-      loc = new MemLoc(this.RAM, this.RAM[--this.SP]);
+      loc = new MemLoc(this.RAM, this.RAM[--this.SP[0]]);
       break;
     case 0x1b:
       loc = new MemLoc(this.SP, 0);
@@ -181,10 +181,10 @@ DCPU16.prototype.getLoc = function(lCode) {
       loc = new MemLoc(this.O, 0);
       break;
     case 0x1e:
-      loc = new MemLoc(this.RAM, this.RAM[++this.PC]);
+      loc = new MemLoc(this.RAM, this.RAM[++this.PC[0]]);
       break;
     case 0x1f:
-      loc = new Literal(this.RAM[++this.PC]);
+      loc = new Literal(this.RAM[++this.PC[0]]);
       break;
     default:
       loc = new Literal(lCode - 0x20);
