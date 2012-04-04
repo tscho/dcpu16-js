@@ -72,16 +72,32 @@ DCPU16.prototype.tick = function() {
       this.O[0] = (res >> 16) & 0xffff;
       break;
     case 0x5: //DIV
-      dst.view[dst.offset] /= this.readLoc(src);
+      if(src.view[src.offset] === 0) { //divide by zero
+        this.O[0] = 0;
+        dst.view[dst.offset] = 0;
+        break;
+      }
+      res = dst.view[dst.offset] / this.readLoc(src);
+      dst.view[dst.offset] = res & 0xffff;
+      this.O[0] = ((dst.view[dst.offset] << 16)/this.readLoc(src)) & 0xffff;
       break;
     case 0x6: //MOD
+      if(src.view[src.offset] === 0) { //divide by zero
+        this.O[0] = 0;
+        dst.view[dst.offset] = 0;
+        break;
+      }
       dst.view[dst.offset] %= this.readLoc(src);
       break;
     case 0x7: //SHL
-      dst.view[dst.offset] <<= this.readLoc(src);
+      res = dst.view[dst.offset] << this.readLoc(src);
+      dst.view[dst.offset] = res & 0xffff;
+      this.O[0] = (res >> 16) & 0xffff;
       break;
     case 0x8: //SHR
-      dst.view[dst.offset] >>= this.readLoc(src);
+      res = dst.view[dst.offset] >> this.readLoc(src);
+      dst.view[dst.offset] = res & 0xffff;
+      this.O[0] = ((dst.view[dst.offset] << 16) >> this.readLoc(src)) & 0xffff;
       break;
     case 0x9: //AND
       dst.view[dst.offset] &= this.readLoc(src);
