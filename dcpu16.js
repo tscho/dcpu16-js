@@ -42,7 +42,7 @@ DCPU16.prototype.tick = function() {
     case 0x0:
       switch (b) {
         case 0x1:
-          this.RAM[--SP] = this.PC[0]+1;
+          this.RAM[--this.SP[0]] = this.PC[0]+1;
           this.PC[0] = a;
           break;
       }

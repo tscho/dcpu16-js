@@ -2,6 +2,7 @@
 
 To-Do
 
+* Actual test it
 * Implement actual run loop
 * Be able to load *something*
 * Add instruction cycles
