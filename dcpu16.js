@@ -32,8 +32,8 @@ DCPU16.prototype.tick = function() {
   var b = (this.RAM[this.PC[0]] & 0xFE00) >> 10;
 
   //hook up src/destination
-  var src = this.getLoc(b);
   var dst = this.getLoc(a);
+  var src = this.getLoc(b);  
 
   if(dst.isLiteral && opcode < 0xc)
     return;
