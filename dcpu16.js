@@ -4,18 +4,18 @@ NUM_REG   = 12;
  
 function DCPU16() {
   this.Buffer = new ArrayBuffer(RAM_SIZE*WORD_SIZE + NUM_REG*WORD_SIZE);
-  this.PC     = new Uint16Array(buffer, 0,  1);
-  this.SP     = new Uint16Array(buffer, 2,  1);
-  this.O      = new Uint16Array(buffer, 4,  1);
-  this.A      = new Uint16Array(buffer, 6,  1);
-  this.B      = new Uint16Array(buffer, 8,  1);
-  this.C      = new Uint16Array(buffer, 10, 1);
-  this.X      = new Uint16Array(buffer, 12, 1);
-  this.Y      = new Uint16Array(buffer, 14, 1);
-  this.Z      = new Uint16Array(buffer, 16, 1);
-  this.I      = new Uint16Array(buffer, 18, 1);
-  this.J      = new Uint16Array(buffer, 20, 1);
-  this.RAM    = new Uint16Array(buffer, 22, RAM_SIZE);
+  this.PC     = new Uint16Array(this.Buffer, 0,  1);
+  this.SP     = new Uint16Array(this.Buffer, 2,  1);
+  this.O      = new Uint16Array(this.Buffer, 4,  1);
+  this.A      = new Uint16Array(this.Buffer, 6,  1);
+  this.B      = new Uint16Array(this.Buffer, 8,  1);
+  this.C      = new Uint16Array(this.Buffer, 10, 1);
+  this.X      = new Uint16Array(this.Buffer, 12, 1);
+  this.Y      = new Uint16Array(this.Buffer, 14, 1);
+  this.Z      = new Uint16Array(this.Buffer, 16, 1);
+  this.I      = new Uint16Array(this.Buffer, 18, 1);
+  this.J      = new Uint16Array(this.Buffer, 20, 1);
+  this.RAM    = new Uint16Array(this.Buffer, 22, RAM_SIZE);
 
   this.registers = [ this.A, this.B, this.C, this.X, this.Y, this.Z,
     this.I, this.J ];
