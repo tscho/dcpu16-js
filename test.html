@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	</head>
+	<body>
+		<textarea id="bincode" cols="80" rows="20">
+0x7c01 0x0030 0x7de1 0x1000 0x0020 0x7803 0x1000 0xc00d
+0x7dc1 0x001a 0xa861 0x7c01 0x2000 0x2161 0x2000 0x8463
+0x806d 0x7dc1 0x000d 0x9031 0x7c10 0x0018 0x7dc1 0x001a
+0x9037 0x61c1 0x7dc1 0x001a 0x0000 0x0000 0x0000 0x0000
+		</textarea>
+		<p><button id="run" onclick="run();">run</button></p>
+		<table>
+			<tr>
+				<td width="3em">A</td>
+				<td id="regA" />
+				<td id="regAb" />
+			</tr>
+			<tr>
+				<td>B</td>
+				<td id="regB" />
+				<td id="regBb" />
+			</tr>
+			<tr>
+				<td>C</td>
+				<td id="regC" />
+				<td id="regCb" />
+			</tr>
+			<tr>
+				<td>X</td>
+				<td id="regX" />
+				<td id="regXb" />
+			</tr>
+			<tr>
+				<td>Y</td>
+				<td id="regY" />
+				<td id="regYb" />
+			</tr>
+			<tr>
+				<td>Z</td>
+				<td id="regZ" />
+				<td id="regZb" />
+			</tr>
+			<tr>
+				<td>I</td>
+				<td id="regI" />
+				<td id="regIb" />
+			</tr>
+			<tr>
+				<td>J</td>
+				<td id="regJ" />
+				<td id="regJb" />
+			</tr>
+			<tr>
+				<td>PC</td>
+				<td id="regPC" />
+				<td id="regPCb" />
+			</tr>
+			<tr>
+				<td>SP</td>
+				<td id="regSP" />
+				<td id="regSPb" />
+			</tr>
+			<tr>
+				<td>O</td>
+				<td id="regO" />
+				<td id="regOb" />
+			</tr>
+		</table>
+	</body>
+	<script src="dcpu16.js" type="text/javascript"></script>
+	<script type="text/javascript">
+		function dtoh(dec) {
+			var res = "";
+			var chars = [ '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' ];
+			
+			do {
+				res = chars[dec % 16] + res;
+				dec = Math.floor(dec/16);
+			} while(dec > 0);
+			
+			return "0x" + res;
+		}
+		
+		function dtob(dec) {
+			var res = "";
+			var chars = [ '0', '1' ];
+
+			do {
+				res = chars[ dec % 2 ] + res;
+				dec = Math.floor(dec/2);
+			} while(dec > 0);
+
+			return "0b" + res;
+		}
+
+
+		function run() {
+			e = document.getElementById("bincode");
+			bin = e.value.split(/[\s|,]+/);
+			for(var i = 0; i < bin.length; i++)
+				bin[i] *= 1;
+
+			console.debug(bin);
+
+			cpu = new DCPU16();
+			cpu.load(bin);
+			cpu.run(10000);
+			document.getElementById("regA").textContent = dtoh(cpu.A[0]);
+			document.getElementById("regAb").textContent = dtob(cpu.A[0]);
+			document.getElementById("regB").textContent = dtoh(cpu.B[0]);
+			document.getElementById("regBb").textContent = dtob(cpu.B[0]);
+			document.getElementById("regC").textContent = dtoh(cpu.C[0]);
+			document.getElementById("regCb").textContent = dtob(cpu.C[0]);
+			document.getElementById("regX").textContent = dtoh(cpu.X[0]);
+			document.getElementById("regXb").textContent = dtob(cpu.X[0]);
+			document.getElementById("regY").textContent = dtoh(cpu.Y[0]);
+			document.getElementById("regYb").textContent = dtob(cpu.Y[0]);
+			document.getElementById("regZ").textContent = dtoh(cpu.Z[0]);
+			document.getElementById("regZb").textContent = dtob(cpu.Z[0]);
+			document.getElementById("regI").textContent = dtoh(cpu.I[0]);
+			document.getElementById("regIb").textContent = dtob(cpu.I[0]);
+			document.getElementById("regJ").textContent = dtoh(cpu.J[0]);
+			document.getElementById("regJb").textContent = dtob(cpu.J[0]);
+			document.getElementById("regPC").textContent = dtoh(cpu.PC[0]);
+			document.getElementById("regPCb").textContent = dtob(cpu.PC[0]);
+			document.getElementById("regSP").textContent = dtoh(cpu.SP[0]);
+			document.getElementById("regSPb").textContent = dtob(cpu.SP[0]);
+			document.getElementById("regO").textContent = dtoh(cpu.O[0]);
+			document.getElementById("regOb").textContent = dtob(cpu.O[0]);
+		}
+	</script>
+</html>
