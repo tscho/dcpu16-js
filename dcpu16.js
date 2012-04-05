@@ -1,4 +1,4 @@
-RAM_SIZE  = 0x1000;
+RAM_SIZE  = 0x10000;
 WORD_SIZE = 2;
 NUM_REG   = 12;
  
