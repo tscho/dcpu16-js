@@ -110,19 +110,19 @@ DCPU16.prototype.tick = function() {
       break;
     case 0xc: //IFE
       if (! this.readLoc(dst) === this.readLoc(src))
-        this.PC[0]++
+        this.PC[0]++;
       break;
     case 0xd: //IFN
       if (this.readLoc(dst) === this.readLoc(src))
-        this.PC[0]++
+        this.PC[0]++;
       break;
     case 0xe: //IFG
       if (this.readLoc(dst) <= this.readLoc(src))
-        this.PC[0]++
+        this.PC[0]++;
       break;
     case 0xf: //IFB
       if ((this.readLoc(dst) & this.readLoc(src)) === 0)
-        this.PC[0]++
+        this.PC[0]++;
       break;
   }
   this.PC[0]++;
