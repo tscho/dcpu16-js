@@ -211,3 +211,18 @@ function Literal(val) {
 function dcpu16() {
   return new DCPU16();
 }
+
+var cpu = dcpu16();
+cpu.RAM[0] = 0x7c11;
+cpu.RAM[1] = 0x0030;
+cpu.RAM[2] = 0x7de1;
+cpu.RAM[3] = 0x1000;
+cpu.RAM[4] = 0x0020;
+cpu.RAM[5] = 0x7813;
+cpu.RAM[6] = 0x1000;
+
+cpu.pc = 0x0;
+
+cpu.tick();
+cpu.tick();
+cpu.tick();
