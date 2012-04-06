@@ -6,6 +6,4 @@ Based on the spec located here: http://0x10c.com/doc/dcpu-16.txt
 To-Do
 
 * Continue testing it
-* Implement actual run loop
-* Fix the hack on loading code in memory
 * Add instruction cycles
