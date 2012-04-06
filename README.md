@@ -1,4 +1,4 @@
-# Working for: 7c01 0030 7de1 1000 0020 7803 1000  so far
+# Working for: the example from the spec
 ## dcpu16-js: A JavaScript implementation of notch/Mojang's DCPU-16
 
 Based on the spec located here: http://0x10c.com/doc/dcpu-16.txt
